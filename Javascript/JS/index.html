@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> My website </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <h1>To do List</h1>
+
+
+    <form id="task-form"> 
+        <label for="task-input">Enter a new Task:</label>
+        <input type="text" id="task-input" name="task-input">
+        <button type="submit">Add Task</button>
+    </form>
+
+    <ul id="task-list"></ul>
+
+    <script>
+        const form = document.querySelector('#task-form');
+        const tasklist = document.querySelector('#task-list');
+
+        function addTask(task) {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <input type="checkbox">
+                <span>${task}</span>
+                <button type="button" class="delete-btn">Delete</button>
+            `;
+            tasklist.appendChild(listItem);
+
+            listItem.querySelector('.delete-btn').addEventListener('click', () => {
+                listItem.remove();
+            });
+        }
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const input = document.querySelector('#task-input');
+            const task = input.value.trim();
+
+            if (task) {
+                addTask(task);
+                input.value = '';
+                input.focus();
+            }
+        });
+
+    
+
+    </script>
+</body>
+</html>
